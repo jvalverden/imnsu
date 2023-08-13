@@ -1,0 +1,1009 @@
+// Block definition (aumentar with para adolescentes y niños)
+FUNCTION_BLOCK estudio1
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (14, 1) (15, 0);
+    TERM poco := (14, 0) (16, 1) (18, 1) (19, 0) ; 
+    TERM indicado := (18, 0) (20, 1) (25, 1) (27, 0);
+    TERM mucho := (26, 0) (27, 1) (50, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio1
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
+//-----------------------------------------------------------------------------------------
+
+FUNCTION_BLOCK estudio4
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (1, 1) (2, 0);
+    TERM poco := (1, 0) (2, 1) (3, 1) (4, 0) ; 
+    TERM indicado := (3, 0) (5, 1) (10, 1) (13, 0);
+    TERM mucho := (11, 0) (13, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio4
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
+//------------------------------------------------------------------------------------------
+FUNCTION_BLOCK estudio7
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (15, 1) (16, 0);
+    TERM poco := (14, 0) (16, 1) (18, 1) (19, 0) ; 
+    TERM indicado := (18, 0) (20, 1) (23, 0);
+    TERM mucho := (21, 0) (23, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio7
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
+//----------------------------------------------------------------------------------------
+FUNCTION_BLOCK estudio16_17
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (12, 1) (14, 0);
+    TERM poco := (13, 0) (15, 1) (18, 1) (19, 0) ; 
+    TERM indicado := (18, 0) (20, 1) (30, 1) (33, 0);
+    TERM mucho := (31, 0) (34, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio16_17
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
+//---------------------------------------------------------------------------------------
+FUNCTION_BLOCK estudio27_28
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (7, 1) (9, 0);
+    TERM poco := (8, 0) (10, 1) (12, 1) (14, 0) ; 
+    TERM indicado := (13, 0) (15, 1) (20, 1) (22, 0);
+    TERM mucho := (21, 0) (23, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio27_28
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS noposible;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS noposible;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS noposible;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
+//------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------
+
+FUNCTION_BLOCK estudio2_8_22
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (14, 1) (15, 0);
+    TERM poco := (14, 0) (16, 1) (18, 1) (19, 0) ; 
+    TERM indicado := (18, 0) (20, 1) (25, 1) (27, 0);
+    TERM mucho := (26, 0) (27, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio2_8_22
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+   RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS demasiado;
+   RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS demasiado;
+   RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS optimo;
+   RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS posible;
+   RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS demasiado;
+   RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS optimo WITH 0.5;
+   RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS posible WITH 0.25;
+   RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible with 0.5;
+   RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+   RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+   RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible WITH 0.5;
+   RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+   RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+   RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+   RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+   RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+   
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
+//------------------------------------------------------------------------------------------
+
+FUNCTION_BLOCK estudio21_24
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (15, 1) (16, 0);
+    TERM poco := (14, 0) (16, 1) (18, 1) (19, 0) ; 
+    TERM indicado := (18, 0) (20, 1) (23, 0);
+    TERM mucho := (21, 0) (23, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio21_24
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS demasiado;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS optimo;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS posible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS optimo WITH 0.5;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS posible WITH 0.25;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible with 0.5;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible WITH 0.5;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
+//--------------------------------------------------------------------------------------
+
+FUNCTION_BLOCK estudio23
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (7, 1) (9, 0);
+    TERM poco := (8, 0) (10, 1) (12, 1) (14, 0) ; 
+    TERM indicado := (13, 0) (15, 1) (20, 1) (22, 0);
+    TERM mucho := (21, 0) (23, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio23
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS demasiado;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS optimo;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS posible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS optimo WITH 0.5;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS posible WITH 0.25;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible with 0.5;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible WITH 0.5;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
+
+//---------------------------------------------------------------------------------------
+FUNCTION_BLOCK estudio3_5_13
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (7, 1) (9, 0);
+    TERM poco := (8, 0) (10, 1) (13, 1) (14, 0) ; 
+    TERM indicado := (13, 0) (15, 1) (18, 0);
+    TERM mucho := (17, 0) (19, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio3_5_13
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS demasiado;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS optimo;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS posible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS optimo WITH 0.5;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS posible WITH 0.25;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible with 0.5;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible WITH 0.5;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
+//----------------------------------------------------------------------------------------------
+FUNCTION_BLOCK estudio6_9_10_25
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (2, 0);
+    TERM poco := (1, 0) (2, 1) (3, 1) (4, 0) ; 
+    TERM indicado := (3, 0) (5, 1) (8, 0);
+    TERM mucho := (7, 0) (8, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio6_9_10_25
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS demasiado;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS optimo;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS posible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS optimo WITH 0.5;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS posible WITH 0.25;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible with 0.5;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible WITH 0.5;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+//--------------------------------------------------------------------------------------
+FUNCTION_BLOCK estudio11
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (32, 1) (34, 0);
+    TERM poco := (33, 0) (35, 1) (37, 1) (39, 0) ; 
+    TERM indicado := (38, 0) (40, 1) (50, 1) (52, 0);
+    TERM mucho := (51, 0) (53, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio11
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS demasiado;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS optimo;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS posible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS optimo WITH 0.5;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS posible WITH 0.25;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible with 0.5;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible WITH 0.5;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+//----------------------------------------------------------------------------------------
+FUNCTION_BLOCK estudio12_18
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (0.25, 0) (0.75, 0);
+    TERM poco := (0.5, 0) (0.75, 1) (1.25, 1) (1.75, 0) ; 
+    TERM indicado := (1, 0) (2, 1) (4, 0);
+    TERM mucho := (3, 0) (3.5, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio12_18
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS demasiado;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS optimo;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS posible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS optimo WITH 0.5;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS posible WITH 0.25;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible with 0.5;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible WITH 0.5;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+//-------------------------------------------------------------------------------------------
+
+FUNCTION_BLOCK estudio14_15_19_20_26
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (0.25, 1) (0.75, 0);
+    TERM poco := (0.5, 0) (1, 1) (1.75, 1) (2.5, 0) ; 
+    TERM indicado := (2, 0) (3, 1) (5, 0);
+    TERM mucho := (3.5, 0) (4, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudioestudio14_15_19_20_26
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS demasiado;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS optimo;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS posible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS optimo WITH 0.5;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS posible WITH 0.25;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible with 0.5;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible WITH 0.5;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+//------------------------------------------------------------------------------------------
+// Block definition (aumentar with para adolescentes y niños)
+FUNCTION_BLOCK estudio29
+
+// Define input variables
+VAR_INPUT
+    edad : REAL;
+    actividad : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    porcentaje : REAL;
+END_VAR
+
+// Fuzzify input variable 
+FUZZIFY actividad
+    TERM muypoco := (0, 1) (18, 1) (19, 0);
+    TERM poco := (18, 0) (20, 1) (23, 1) (24, 0) ; 
+    TERM indicado := (23, 0) (25, 1) (30, 1) (32, 0);
+    TERM mucho := (31, 0) (33, 1) (400, 1);
+END_FUZZIFY
+
+// Fuzzify input variable 
+FUZZIFY edad
+    TERM nino := (0, 1) (12, 1) (14, 0) ;
+    TERM nino_adolescente := (11, 0) (13, 1) (16, 1 ) (17, 0);
+    TERM adolescente_adulto := (15, 0) (17, 1) (20, 1) (21, 0);
+    TERM adulto := (18, 0) (21, 1) (100, 1);
+END_FUZZIFY
+// Defzzzify output variable 
+DEFUZZIFY porcentaje
+    TERM noposible := (0, 1) (24, 1) (26, 0);
+    TERM posible := (23, 0) (25, 1) (49, 1) (51, 0);
+    TERM optimo := (48, 0) (50, 1) (74, 1) (76, 0);
+    TERM demasiado := (73, 0) (75, 1) (100, 1);
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK estudio29
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    // Use 'min' activation method
+    ACT : MIN;
+    // Use 'max' accumulation method
+    ACCU : MAX;
+
+    RULE 1 : IF edad IS nino AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 2 : IF edad IS nino AND actividad IS indicado THEN porcentaje IS demasiado;
+    RULE 3 : IF edad IS nino AND actividad IS poco THEN porcentaje IS optimo;
+    RULE 4 : IF edad IS nino AND actividad IS muypoco THEN porcentaje IS posible;
+    RULE 5 : IF edad IS nino_adolescente AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 6 : IF edad IS nino_adolescente AND actividad IS indicado THEN porcentaje IS optimo WITH 0.5;
+    RULE 7 : IF edad IS nino_adolescente AND actividad IS poco THEN porcentaje IS posible WITH 0.25;
+    RULE 8 : IF edad IS nino_adolescente AND actividad IS muypoco THEN porcentaje IS noposible with 0.5;
+    RULE 9 : IF edad IS adolescente_adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 10 : IF edad IS adolescente_adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 11 : IF edad IS adolescente_adulto AND actividad IS poco THEN porcentaje IS posible WITH 0.5;
+    RULE 12 : IF edad IS adolescente_adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+    RULE 13 : IF edad IS adulto AND actividad IS mucho THEN porcentaje IS demasiado;
+    RULE 14 : IF edad IS adulto AND actividad IS indicado THEN porcentaje IS optimo;
+    RULE 15 : IF edad IS adulto AND actividad IS poco THEN porcentaje IS posible;
+    RULE 16 : IF edad IS adulto AND actividad IS muypoco THEN porcentaje IS noposible;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

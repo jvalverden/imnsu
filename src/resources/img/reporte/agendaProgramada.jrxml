@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="agendaProgramada" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="742" leftMargin="50" rightMargin="50" topMargin="50" bottomMargin="50" uuid="853e0514-1544-4ac8-8b22-eaaa04a7080c">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="64"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="f1" class="java.util.Date"/>
+	<parameter name="f2" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select b.paterno||' '||b.materno||' '||b.nombre as nom,b.edad,b.fechainicioespera::date,a.fechaconfirmada::date,horainyeccion::time,c.descripcion as estudio from personatipoestudio a
+join persona b on a.idpersona=b.id
+join tipoestudio c on a.idtipoestudio=c.id
+where a.fechaconfirmada::date>=$P{f1} and a.fechaconfirmada::date<=$P{f2}]]>
+	</queryString>
+	<field name="nom" class="java.lang.String"/>
+	<field name="edad" class="java.lang.Integer"/>
+	<field name="fechainicioespera" class="java.sql.Date"/>
+	<field name="fechaconfirmada" class="java.sql.Date"/>
+	<field name="horainyeccion" class="java.sql.Time"/>
+	<field name="estudio" class="java.lang.String"/>
+	<group name="fechahoraestudio">
+		<groupExpression><![CDATA[$F{fechaconfirmada}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement style="SubTitle" x="92" y="-39" width="650" height="11" forecolor="#000000" uuid="ada40f97-9de6-44b8-8051-71fc57be0cb8"/>
+					<box>
+						<topPen lineWidth="0.5" lineColor="#000000"/>
+						<rightPen lineWidth="0.5" lineColor="#000000"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fechaconfirmada}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="Column header" x="18" y="-39" width="74" height="11" forecolor="#000000" uuid="b73d4f5d-60a0-4994-b9d4-2dbc842b330c"/>
+					<box leftPadding="4" rightPadding="4">
+						<topPen lineWidth="0.5" lineColor="#000000"/>
+						<leftPen lineWidth="0.5" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineColor="#000000"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Fecha Estudio:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="18" y="-28" width="111" height="11" forecolor="#000000" uuid="3d5e6208-23ad-4e59-b4b8-016d757cd632"/>
+					<box leftPadding="4" rightPadding="4">
+						<topPen lineWidth="0.5" lineColor="#000000"/>
+						<leftPen lineWidth="0.5" lineColor="#000000"/>
+						<bottomPen lineWidth="0.5" lineColor="#000000"/>
+						<rightPen lineWidth="0.5" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Paciente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="129" y="-28" width="43" height="11" forecolor="#000000" uuid="f3e403d8-6507-4b57-8610-69ed653ac7e6"/>
+					<box leftPadding="4" rightPadding="4">
+						<pen lineColor="#000000"/>
+						<topPen lineWidth="0.5" lineColor="#000000"/>
+						<leftPen lineColor="#000000"/>
+						<bottomPen lineWidth="0.5" lineColor="#000000"/>
+						<rightPen lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[edad]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="172" y="-28" width="90" height="11" forecolor="#000000" uuid="5afaf4ef-e12c-4ce6-8eec-3d651da1e9d7"/>
+					<box leftPadding="4" rightPadding="4">
+						<topPen lineWidth="0.5" lineColor="#000000"/>
+						<leftPen lineWidth="0.5" lineColor="#000000"/>
+						<bottomPen lineWidth="0.5" lineColor="#000000"/>
+						<rightPen lineWidth="0.5" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Fecha Inicio Espera]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="262" y="-28" width="69" height="11" forecolor="#000000" uuid="e2151372-e8ba-4d35-b218-478f0718c5d2"/>
+					<box leftPadding="4" rightPadding="4">
+						<pen lineColor="#000000"/>
+						<topPen lineWidth="0.5" lineColor="#000000"/>
+						<leftPen lineColor="#000000"/>
+						<bottomPen lineWidth="0.5" lineColor="#000000"/>
+						<rightPen lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Hora Inyección]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="331" y="-28" width="411" height="11" forecolor="#000000" uuid="a7221c10-1fb1-4b2c-a237-eb9243fce5ee"/>
+					<box leftPadding="4" rightPadding="4">
+						<topPen lineWidth="0.5" lineColor="#000000"/>
+						<leftPen lineWidth="0.5" lineColor="#000000"/>
+						<bottomPen lineWidth="0.5" lineColor="#000000"/>
+						<rightPen lineWidth="0.5" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Estudio]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="137" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="94" y="0" width="554" height="67" uuid="b7ed7c50-054d-4429-bdd4-f60fb71235b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Agenda Programada de Pacientes
+Sistema IMNSU]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="18" y="-39" width="111" height="11" forecolor="#000000" uuid="fe9636e0-a336-4ba9-89d1-189eb467cbf6"/>
+				<box>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="129" y="-39" width="43" height="11" forecolor="#000000" uuid="bb529da0-ceeb-4d38-aa4d-bb09df769e2b"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="172" y="-39" width="90" height="11" forecolor="#000000" uuid="bb98165c-2744-4411-a878-f584a0f737b4"/>
+				<box>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechainicioespera}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="HH:mm">
+				<reportElement style="Detail" x="262" y="-39" width="69" height="11" forecolor="#000000" uuid="da585694-4d58-48f6-8735-533817a3ed60"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{horainyeccion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="331" y="-39" width="411" height="11" forecolor="#000000" uuid="e7118c6b-d6cd-4f5f-8afb-e8277fba6d2f"/>
+				<box>
+					<leftPen lineWidth="0.5" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estudio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="701" y="-39" width="40" height="20" forecolor="#736343" uuid="5f615df9-b781-4f6b-a240-c9a8a1a50359"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Column header" x="621" y="-39" width="80" height="20" forecolor="#736343" uuid="a579f4aa-84e5-4a94-8bed-cbe13cd4e04a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" forecolor="#736343" uuid="8ea5c321-8d7f-46cb-ba6e-118d8334e009"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
